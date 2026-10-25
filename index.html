@@ -17,7 +17,7 @@ button{font:inherit;cursor:pointer}.mu{color:var(--mu)}.err{color:var(--er)}
 .neg:hover{transform:translateY(-2px)}.neg img{width:100%;max-width:260px;border-radius:8px}.neg span{font-size:13px;letter-spacing:.12em;text-transform:uppercase}
 .esm{background:#000;border-color:#3a3320}.esm span{color:var(--au)}.bre{background:#f7e9dd;color:#6b6a3a}.bre span{color:#a0603a}
 footer{margin-top:40px;text-align:center;color:var(--mu);font-size:12px}
-.login{max-width:360px;margin:12vh auto 0;padding:0 20px;text-align:center}.login img{width:220px;margin-bottom:26px}
+.login{max-width:360px;margin:12vh auto 0;padding:0 20px;text-align:center}.duo{display:grid;gap:12px;margin-bottom:26px}.duo img{width:100%;border-radius:12px}
 input,select{width:100%;background:var(--cd);color:var(--tx);border:1px solid var(--ln);border-radius:10px;padding:12px;font:inherit;margin-bottom:12px}
 input:focus,select:focus{outline:2px solid var(--au);border-color:transparent}label{display:block;font-size:12px;color:var(--mu);margin:4px 0 6px}
 .btn{width:100%;background:var(--au);color:#111;border:0;border-radius:12px;padding:14px;font-weight:700;margin-top:6px}.btn.sec{background:var(--cd);color:var(--tx);border:1px solid var(--ln)}.btn:disabled{opacity:.5}
@@ -58,7 +58,7 @@ async function api(acao,x={}){
  if(j.sessao===false){sair(true);throw new Error(j.erro)}
  if(!j.ok)throw new Error(j.erro||'Erro');return j}
 function view(){if(!S.sess)return loginV();S.neg?shell():hub()}
-function loginV(){$('#app').innerHTML=`<form class="login" onsubmit="entrar(event)"><img src="${LOGO_E}" alt="ESMÉER"><input id="u" placeholder="Usuário" autocomplete="username" autocapitalize="none"><input id="p" type="password" placeholder="Senha" autocomplete="current-password"><p id="err" class="err"></p><button class="btn" id="lb">Entrar</button><footer>Wellysson Silva · Gestor Comercial</footer></form>`}
+function loginV(){$('#app').innerHTML=`<form class="login" onsubmit="entrar(event)"><div class="duo"><img src="${LOGO_E}" alt="ESMÉER"><img src="${LOGO_B}" alt="Brechó Moda Circular"></div><input id="u" placeholder="Usuário" autocomplete="username" autocapitalize="none"><input id="p" type="password" placeholder="Senha" autocomplete="current-password"><p id="err" class="err"></p><button class="btn" id="lb">Entrar</button><footer>Wellysson Silva · Gestor Comercial</footer></form>`}
 async function entrar(e){e.preventDefault();const b=$('#lb');b.disabled=true;$('#err').textContent='';
  try{const j=await api('login',{user:$('#u').value,senha:$('#p').value});S.sess={s:j.sessao,nome:j.nome};localStorage.setItem('sess',JSON.stringify(S.sess));view()}
  catch(x){$('#err').textContent=x.message;b.disabled=false}}
